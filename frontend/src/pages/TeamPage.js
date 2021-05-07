@@ -1,17 +1,45 @@
-import { React } from 'react';
+import { React, useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 import MatchDetailsCard from '../components/MatchDetailsCard';
 import MatchSmallCard from '../components/MatchSmallCard';
 
 function TeamPage(){
+
+    const [match, setMatch] = useState({matches:[]});
+    const [teamFound, setTeamFound] = useState(false)
+    const {teamName} = useParams();
+
+    useEffect( () => {
+        axios.get(`http://localhost:8080/teams/${teamName}`)
+            .then(response => {
+                setMatch(response.data);
+                setTeamFound(true)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [teamName]);       
+
     return (
-        <div className={"teamPage"}>
-            <h1>Team Name</h1>
-            <MatchDetailsCard />
-            <MatchSmallCard />
-            <MatchSmallCard />
-            <MatchSmallCard />
-        </div>
+        <>
+            {teamFound && 
+                <div className={"teamPage"}>
+                    <h1>{match.teamName}</h1>
+                    <MatchDetailsCard match={match.matches[0]} teamName={match.teamName}/>
+                    {match.matches.slice(1).map(m => <MatchSmallCard teamName={match.teamName} match={m} key={m.id}/>)}
+                </div>
+            }
+
+            {!teamFound && 
+                <div>
+                    <h1>Team not found</h1>
+                </div>
+            }
+
+        </>
     );
 }
 
-export default TeamPage;
+export default TeamPage; 
