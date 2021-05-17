@@ -1,0 +1,39 @@
+.team-page{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+}
+
+.team-name-section{
+    justify-self: start;
+    align-self: end;
+    grid-column: span 3;
+}
+
+.more-link{
+    font-size: 1.5rem;
+    justify-self: center;
+    margin-top: 45%;
+}
+
+.pie-chart{
+    justify-self: center;
+    text-align: center;
+}
+
+.pie-chart h4{
+    margin-top: 10px;
+    font-size: 1.5rem;
+}
+
+
+.team-name{
+    font-size: 4rem;
+}
+.match-details-card{
+    grid-column: span 4;
+
+}
+

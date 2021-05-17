@@ -1,0 +1,25 @@
+.match-date, .match-winner, .match-venue{
+    margin-top: 15px;
+}
+
+.match-details-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 30px;
+    padding-top: 10px;
+
+}
+
+.additional-detail{
+    text-align: right;
+    margin-right: 30px;
+}
+
+.main-detail{
+    margin-left: 20px;
+    padding: 10px;
+}
+
+p{
+    margin-bottom: 20px;
+}

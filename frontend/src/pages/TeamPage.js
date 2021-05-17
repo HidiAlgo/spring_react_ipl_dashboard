@@ -1,9 +1,12 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { PieChart } from 'react-minimal-pie-chart';
 
 import MatchDetailsCard from '../components/MatchDetailsCard';
 import MatchSmallCard from '../components/MatchSmallCard';
+
+import './team-page.css';
 
 function TeamPage(){
 
@@ -25,10 +28,28 @@ function TeamPage(){
     return (
         <>
             {teamFound && 
-                <div className={"teamPage"}>
-                    <h1>{match.teamName}</h1>
-                    <MatchDetailsCard match={match.matches[0]} teamName={match.teamName}/>
+                <div className="team-page">
+                    <div className="team-name-section">
+                        <h1 className="team-name">{match.teamName}</h1>
+                    </div>
+                    <div className="pie-chart">
+                        <h4>Win / Loses</h4>
+
+                        <PieChart
+                            data={[
+                                { title: 'Wins', value: match.totalWins, color: '#4da375' },
+                                { title: 'Loses', value: match.totalMatches - match.totalWins, color: '#a34d5d' },
+                            ]}
+                        />
+                    </div>
+                    <div className="match-details-card">
+                        <h3>Latest Match</h3>
+                        <MatchDetailsCard match={match.matches[0]} teamName={match.teamName}/>
+                    </div>
                     {match.matches.slice(1).map(m => <MatchSmallCard teamName={match.teamName} match={m} key={m.id}/>)}
+                    <div className="more-link">
+                        <a href="#" >More ></a>
+                    </div>
                 </div>
             }
 
